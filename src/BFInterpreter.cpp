@@ -6,7 +6,6 @@ namespace BF
 
 	Interpreter::Interpreter()
 	{
-		std::memset(m_BFMem, 0, sizeof(m_BFMem));
 	}
 
 	void Interpreter::exec(const Instruction& instruction)

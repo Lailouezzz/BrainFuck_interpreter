@@ -14,7 +14,7 @@ namespace BF
 	class Interpreter // Brain Fuck interpreter
 	{
 
-		uint8_t m_BFMem[30000]; // Brain Fuck mem 30'000 bytes
+		uint8_t m_BFMem[30000] = { 0 }; // Brain Fuck mem 30'000 bytes initialised to 0
 		int16_t m_BFPointer = 0; // Offset of pointer for BF mem
 
 	public:
