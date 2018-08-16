@@ -14,28 +14,52 @@ namespace BF
 		{
 		case RIGHTMOVEPTR:
 			m_BFPointer++;
-			if (m_BFPointer >= 30000)
-			{
-				throw Exception("BF pointer was higher than 29,999");
-			}
 			break;
 		case LEFTMOVEPTR:
 			m_BFPointer--;
-			if (m_BFPointer < 0)
-			{
-				throw Exception("BF pointer was smaller than 0");
-			}
 			break;
 		case ADDATPTR:
+			if (m_BFPointer < 0)
+			{
+				throw Exception("BF mem access address was smaller than 0");
+			}
+			else if (m_BFPointer >= 30000)
+			{
+				throw Exception("BF mem access address was higher than 29,999");
+			}
 			(*(reinterpret_cast<uint8_t*>(m_BFMem + m_BFPointer))) += 1;
 			break;
 		case SUBATPTR:
+			if (m_BFPointer < 0)
+			{
+				throw Exception("BF mem access address was smaller than 0");
+			}
+			else if (m_BFPointer >= 30000)
+			{
+				throw Exception("BF mem access address was higher than 29,999");
+			}
 			(*(reinterpret_cast<uint8_t*>(m_BFMem + m_BFPointer))) -= 1;
 			break;
 		case DISPLAYBYTE:
+			if (m_BFPointer < 0)
+			{
+				throw Exception("BF mem access address was smaller than 0");
+			}
+			else if (m_BFPointer >= 30000)
+			{
+				throw Exception("BF mem access address was higher than 29,999");
+			}
 			std::cout << (*(reinterpret_cast<uint8_t*>(m_BFMem + m_BFPointer)));
 			break;
 		case READBYTE:
+			if (m_BFPointer < 0)
+			{
+				throw Exception("BF mem access address was smaller than 0");
+			}
+			else if (m_BFPointer >= 30000)
+			{
+				throw Exception("BF mem access address was higher than 29,999");
+			}
 			std::cin.get(*reinterpret_cast<char*>(m_BFMem + m_BFPointer));
 			std::cin.ignore(INT_MAX, '\n');
 			break;
@@ -48,7 +72,7 @@ namespace BF
 	{
 		verificator(instructions);
 		std::stack<size_t> lastEnter;
-		for (unsigned int i = 0; i < instructions.size(); i++)
+		for (size_t i = 0; i < instructions.size(); i++)
 		{
 			switch (instructions[i])
 			{
@@ -59,7 +83,7 @@ namespace BF
 				}
 				else
 				{
-					for (size_t level = 0; level != 0 || instructions[i] != JNZ; i++)
+					for (size_t level = 0; (instructions[++i] != JNZ || level != 0);)
 					{
 						switch (instructions[i])
 						{
