@@ -1,6 +1,7 @@
 #ifndef HEADER_BFInterpreter
 #define HEADER_BFInterpreter
 #include <cstring>
+#include <climits>
 #include <iostream>
 #include <stack>
 #include "BF.hpp"
